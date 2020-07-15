@@ -1,9 +1,9 @@
 {
-  "name": "apptestebuild",
-  "displayName": "apptestebuild",
+  "name": "taskApp",
+  "displayName": "taskApp",
   "expo": {
-    "name": "apptestebuild",
-    "slug": "apptestebuild",
+    "name": "taskApp",
+    "slug": "taskApp",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
