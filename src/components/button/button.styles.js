@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
-    background-color: #fff;
+    background-color: ${props=>props.primary ? props.primary : '#fff'};
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -10,5 +10,5 @@ export const Container = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
     font-size: 14px;
-    color: #342ead;
+    color: ${props=>props.secondary ? props.secondary : '#000'};
 `

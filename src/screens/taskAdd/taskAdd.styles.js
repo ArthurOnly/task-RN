@@ -38,6 +38,11 @@ export const Body = styled.View`
     flex-direction: row;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    &:last-child{
+        margin-top: 20px;
+    }
 `
 
 export const TextInput = styled.TextInput`

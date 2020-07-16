@@ -4,8 +4,8 @@ import React from 'react'
 
 export default function Button(props){
     return(
-        <Container onPress={props.onPress}>
-            <ButtonText>{props.name}</ButtonText>
+        <Container onPress={props.onPress} primary={props.primary}>
+            <ButtonText secondary={props.secondary}>{props.name}</ButtonText>
         </Container>
     )
 }

@@ -9,17 +9,29 @@ import Button from '../../components/button/button'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Task from '../../components/taskComponent/task'
 
-export default function TaskAdd(){
+import DatePicker from 'react-native-datepicker'
+
+export default function TaskAdd( {navigation} ){
     const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Outubro','Setembro','Novembro','Dezembro']
     const [data,setData] = useState(new Date().getDate()+" de "+meses[new Date().getMonth()])
 
     const tasks = useSelector(state => state.tasks)
     const dispatch = useDispatch()
+
+    const actualDate = () => {
+        const date = new Date()
+        const year = date.getUTCFullYear()
+        const day = date.getUTCDate() < 10 ? '0'+date.getUTCDate() : date.getUTCDate()
+        const month = date.getUTCMonth()+1 < 10 ? '0'+(date.getUTCMonth()+1) : date.getUTCMonth()+1
+        
+        const formatedDate = `${day}/${month}/${year}`
+        return formatedDate
+    }
     
     return(
         <Container>
             <Header>
-                <Text/>
+                <Icon name='arrow-back' size={20} color="#fff" onPress={()=>navigation.navigate('Home')}/>
                 <TextBig>{data}</TextBig>
                 <Icon name='settings' size={20} color="#fff"/>
             </Header>
@@ -27,8 +39,20 @@ export default function TaskAdd(){
                 <TextBig color='#342ead'>Titúlo da tarefa</TextBig>
                 <TextInput></TextInput>
 
-                <TextBig color='#342ead'>Descrição</TextBig>
-                <TextInput multiline></TextInput>
+                <TextBig color='#342ead'>Data da tarefa</TextBig>
+                <DatePicker
+                    style={{width: '80%'}}
+                    date={actualDate}
+                    mode="date"
+                    placeholder="select date"
+                    format="DD/MM/YYYY"
+                    minDate={actualDate}
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    iconComponent={<Icon name="event" size={30} color="#342ead" />}
+                    onDateChange={(date) => {this.setState({date: date})}}
+                />
+                <Button name='Criar tarefa' primary='#342ead' secondary='#fff'/>
             </Body>
         </Container>
     )

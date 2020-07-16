@@ -1,6 +1,7 @@
 import {Body, Container, Header, TaskList, TaskTitle, TextBig, TextSml} from './home.styles'
 import React,{useState} from 'react'
 import {Text, View} from 'react-native'
+import {  } from '@react-navigation/native';
 
 import {useDispatch,useSelector} from 'react-redux'
 import {taskAdd,taskGetList} from '../../redux/actions'
@@ -9,7 +10,7 @@ import Button from '../../components/button/button'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Task from '../../components/taskComponent/task'
 
-export default function Home(){
+export default function Home({navigation}){
     const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Outubro','Setembro','Novembro','Dezembro']
     const [data,setData] = useState(new Date().getDate()+" de "+meses[new Date().getMonth()])
 
@@ -28,8 +29,8 @@ export default function Home(){
                     <TextBig>Hoje</TextBig>
                     <TextSml>3 tarefas</TextSml>
                 </View>
-                <Button onPress={()=>taskAdd({name:'task',description:'taskdescription'})} name='Adicionar'/>
-                <Button onPress={()=>taskGetList(dispatch)} name='GetALl'/>
+                <Button onPress={()=>navigation.navigate('Adicionar')} name='Adicionar' color='#fff'/>
+                <Button onPress={()=>taskGetList(dispatch)} name='GetALl' color='#fff'/>
             </Header>
             <Body horizontal={true}>
                 <TaskList>  
