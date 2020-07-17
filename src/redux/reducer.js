@@ -18,7 +18,8 @@ export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case TASK_ADD: {
       const payload = action.payload
-      return {...state, task: payload}
+      const newTasks = [state.tasks.concat(payload)]
+      return {...state, tasks: newTasks}
     }
 
     case TASK_UPDATE: {

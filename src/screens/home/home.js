@@ -40,7 +40,7 @@ export default function Home({navigation}){
                     </TaskTitle>
                     {
                         tasks.map(task=>{
-                            return <Task key={task[0]} title={JSON.parse(task[1]).name} data='01/01/01'/>
+                            return <Task key={task[0]} title={JSON.parse(task[1]).title} data='01/01/01'/>
                         })
                     }
                     <Task title='teste' data='01/01/01'/>

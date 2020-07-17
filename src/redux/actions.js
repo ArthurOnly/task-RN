@@ -8,11 +8,15 @@ export const TASK_GET_ID = 'TASK_GET_ID'
 export const TASK_SELECT = 'TASK_SELECT'
 export const TASK_SELECT_REMOVE = 'TASK_SELECT_REMOVE'
 
-export async function taskAdd(data) {
+export async function taskAdd(data,dispatch) {
   const itemKey = new Date().getTime().toString()
   const item = JSON.stringify(data)
-  const payload = await AsyncStorage.setItem(itemKey, item, err => alert('Error',err))
-  return {type: TASK_ADD, payload}
+  try{
+    await AsyncStorage.setItem(itemKey, item)
+  } catch (error) {
+    alert (error)
+  }
+  return dispatch({type: TASK_ADD, payload: [itemKey,item]})
 }
 
 export function taskUpdate(id,data) {
