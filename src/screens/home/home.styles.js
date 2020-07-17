@@ -51,3 +51,16 @@ export const TaskTitle = styled.View`
 export const TaskList = styled.ScrollView`
     width: ${vw(100)};
 `;
+
+export const DeleteButton = styled.TouchableOpacity`
+    background-color:#342ead;
+    border-radius: 100px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+`

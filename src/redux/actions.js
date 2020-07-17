@@ -5,8 +5,7 @@ export const TASK_UPDATE = 'TASK_UPDATE'
 export const TASK_DELETE = 'TASK_DELETE'
 export const TASK_GET_LIST = 'TASK_GET_LIST'
 export const TASK_GET_ID = 'TASK_GET_ID'
-export const TASK_SELECT = 'TASK_SELECT'
-export const TASK_SELECT_REMOVE = 'TASK_SELECT_REMOVE'
+export const TASK_SELECT_TOGGLER = 'TASK_SELECT_TOGGLER'
 
 export async function taskAdd(data,dispatch) {
   const itemKey = new Date().getTime().toString()
@@ -24,8 +23,8 @@ export function taskUpdate(id,data) {
   return {type: TASK_UPDATE, payload}
 }
 
-export function taskDelete(id) {
-  //Logica de add
+export function taskDelete(ids) {
+  AsyncStorage.multiRemove(ids)
   return {type: TASK_DELETE, payload: id}
 }
 
@@ -39,10 +38,6 @@ export function taskGet(id) {
   return {type: TASK_GET_ID, payload: id}.payload
 }
 
-export function taskSelect(id) {
-  return {type: TASK_SELECT, payload: id}
-}
-
-export function taskSelectRemove(id){
-  return {type: TASK_SELECT_REMOVE, payload: id}
+export async function taskSelectToggler(id,dispatch) {
+  return dispatch({type: TASK_SELECT_TOGGLER, payload: id})
 }

@@ -4,8 +4,7 @@ import {
   TASK_DELETE,
   TASK_GET_ID,
   TASK_GET_LIST,
-  TASK_SELECT,
-  TASK_SELECT_REMOVE
+  TASK_SELECT_TOGGLER
 } from './actions'
 
 const INITIAL_STATE = {
@@ -42,15 +41,15 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {...state, tasks: payload}
     }
 
-    case TASK_SELECT: {
-      const payload = action.payload
-      return {...state, taskSelecteds: [...state.taskSelecteds, payload]}
-    }
-
-    case TASK_SELECT_REMOVE: {
-      const payload = action.payload
-      const selecteds = state.taskSelecteds.filter(el=>{if (el!==payload) return el})
-      return {...state, taskSelecteds: selecteds}
+    case TASK_SELECT_TOGGLER: {
+      const id = action.payload
+      const hasTask = state.taskSelecteds.map(task=>{if(id===task[0]) return true})
+      if (hasTask){
+        return {...state, taskSelecteds: [...state.taskSelecteds, id]}
+      } else {
+        const selecteds = state.taskSelecteds.filter(el=>{if (el!==id) return el})
+        return {...state, taskSelecteds: selecteds}
+      }
     }
 
     default:

@@ -1,10 +1,10 @@
-import {Body, Container, Header, TaskList, TaskTitle, TextBig, TextSml} from './home.styles'
+import {Body, Container, Header, TaskList, TaskTitle, TextBig, TextSml, DeleteButton} from './home.styles'
 import React,{useState} from 'react'
 import {Text, View} from 'react-native'
 import {  } from '@react-navigation/native';
 
 import {useDispatch,useSelector} from 'react-redux'
-import {taskAdd,taskGetList} from '../../redux/actions'
+import {taskDelete,taskGetList} from '../../redux/actions'
 
 import Button from '../../components/button/button'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -15,7 +15,12 @@ export default function Home({navigation}){
     const [data,setData] = useState(new Date().getDate()+" de "+meses[new Date().getMonth()])
 
     const tasks = useSelector(state => state.tasks)
+    const tasksSelect = useSelector(state => state.taskSelecteds)
     const dispatch = useDispatch()
+
+    function deleteSelectTasks(){
+        taskDelete(tasksSelect)
+    }
     
     return(
         <Container>
@@ -40,7 +45,7 @@ export default function Home({navigation}){
                     </TaskTitle>
                     {
                         tasks.map(task=>{
-                            return <Task key={task[0]} title={JSON.parse(task[1]).title} data='01/01/01'/>
+                            return <Task id={task[0]} title={JSON.parse(task[1]).title} data='01/01/01'/>
                         })
                     }
                     <Task title='teste' data='01/01/01'/>
@@ -60,6 +65,9 @@ export default function Home({navigation}){
                     <Task title='teste' data='01/01/01'/>
                 </TaskList>
             </Body>
+            <DeleteButton onPress={deleteSelectTasks()}>
+                <Icon name='delete' size={20} color="#fff"/>
+            </DeleteButton>
         </Container>
     )
 }
